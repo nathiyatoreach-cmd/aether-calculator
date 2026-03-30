@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aether Precision Calculator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="page-shell">
+    <div class="ambient ambient-one"></div>
+    <div class="ambient ambient-two"></div>
+
+    <main class="calculator">
+      <section class="display-panel">
+        <div class="panel-top">
+          <div>
+            <p class="eyebrow">Precision Lab</p>
+            <h1>Aether Calculator</h1>
+          </div>
+
+          <div class="mode-cluster">
+            <button class="mode-pill is-active" id="angle-toggle" type="button" aria-pressed="false">
+              RAD
+            </button>
+            <button class="mode-pill" id="copy-result" type="button">
+              Copy Result
+            </button>
+          </div>
+        </div>
+
+        <div class="display-card">
+          <label class="input-label" for="expression-input">Expression</label>
+          <input
+            id="expression-input"
+            class="expression-input"
+            type="text"
+            inputmode="text"
+            spellcheck="false"
+            autocomplete="off"
+            placeholder="Try: (2.5 + 7.5) / 4, sin(pi / 6), 50!, sqrt(2)"
+            aria-describedby="status-line"
+          >
+
+          <div class="preview-row">
+            <span class="result-badge" id="result-badge">READY</span>
+            <output id="result-output" class="result-output" aria-live="polite">0</output>
+          </div>
+
+          <div class="meta-row">
+            <p id="status-line" class="status-line">Exact decimal engine ready for +, -, *, /, and integer powers.</p>
+            <p id="memory-line" class="memory-line">Memory: empty</p>
+          </div>
+        </div>
+
+        <div class="memory-toolbar">
+          <button type="button" class="toolbar-button" data-action="memory-clear">MC</button>
+          <button type="button" class="toolbar-button" data-action="memory-recall">MR</button>
+          <button type="button" class="toolbar-button" data-action="memory-add">M+</button>
+          <button type="button" class="toolbar-button" data-action="memory-subtract">M-</button>
+          <button type="button" class="toolbar-button" data-action="use-answer">ANS</button>
+          <button type="button" class="toolbar-button" data-action="clear-history">Clear History</button>
+        </div>
+
+        <div class="insight-grid">
+          <article class="insight-card">
+            <h2>Fast by Design</h2>
+            <p>Custom tokenizing and parsing, no `eval()`, instant keyboard feedback.</p>
+          </article>
+          <article class="insight-card">
+            <h2>Accuracy First</h2>
+            <p>Core decimal math runs on BigInt-backed precision instead of floating-point shortcuts.</p>
+          </article>
+          <article class="insight-card">
+            <h2>Scientific Reach</h2>
+            <p>Trig, logs, factorials, roots, history, memory, and chained expressions.</p>
+          </article>
+        </div>
+
+        <section class="history-panel" aria-labelledby="history-title">
+          <div class="section-heading">
+            <h2 id="history-title">History</h2>
+            <p>Tap any result to reuse it.</p>
+          </div>
+          <div id="history-list" class="history-list">
+            <div class="history-empty">No calculations yet.</div>
+          </div>
+        </section>
+      </section>
+
+      <section class="controls-panel">
+        <div class="section-heading">
+          <h2>Command Deck</h2>
+          <p>Mouse, touch, or keyboard. Press <kbd>Enter</kbd> to solve.</p>
+        </div>
+
+        <div class="keypad" id="keypad">
+          <button type="button" class="key key-utility" data-action="all-clear">AC</button>
+          <button type="button" class="key key-utility" data-action="clear-entry">C</button>
+          <button type="button" class="key key-utility" data-insert="(">(</button>
+          <button type="button" class="key key-utility" data-insert=")">)</button>
+          <button type="button" class="key key-utility" data-insert=",">,</button>
+          <button type="button" class="key key-utility" data-action="backspace">⌫</button>
+
+          <button type="button" class="key key-function" data-insert="pi">π</button>
+          <button type="button" class="key key-function" data-insert="e">e</button>
+          <button type="button" class="key key-function" data-insert="tau">τ</button>
+          <button type="button" class="key key-function" data-insert="^">xʸ</button>
+          <button type="button" class="key key-function" data-action="square">x²</button>
+          <button type="button" class="key key-function" data-insert="!">x!</button>
+
+          <button type="button" class="key key-function" data-insert="sin(">sin</button>
+          <button type="button" class="key key-function" data-insert="cos(">cos</button>
+          <button type="button" class="key key-function" data-insert="tan(">tan</button>
+          <button type="button" class="key key-function" data-insert="ln(">ln</button>
+          <button type="button" class="key key-function" data-insert="log(">log</button>
+          <button type="button" class="key key-operator" data-insert="/">÷</button>
+
+          <button type="button" class="key" data-insert="7">7</button>
+          <button type="button" class="key" data-insert="8">8</button>
+          <button type="button" class="key" data-insert="9">9</button>
+          <button type="button" class="key key-operator" data-insert="*">×</button>
+          <button type="button" class="key key-function" data-insert="sqrt(">√</button>
+          <button type="button" class="key key-function" data-insert="abs(">abs</button>
+
+          <button type="button" class="key" data-insert="4">4</button>
+          <button type="button" class="key" data-insert="5">5</button>
+          <button type="button" class="key" data-insert="6">6</button>
+          <button type="button" class="key key-operator" data-insert="-">−</button>
+          <button type="button" class="key key-function" data-insert="exp(">exp</button>
+          <button type="button" class="key key-function" data-insert="cbrt(">cbrt</button>
+
+          <button type="button" class="key" data-insert="1">1</button>
+          <button type="button" class="key" data-insert="2">2</button>
+          <button type="button" class="key" data-insert="3">3</button>
+          <button type="button" class="key key-operator" data-insert="+">+</button>
+          <button type="button" class="key key-function" data-insert="floor(">floor</button>
+          <button type="button" class="key key-function" data-insert="ceil(">ceil</button>
+
+          <button type="button" class="key key-zero" data-insert="0">0</button>
+          <button type="button" class="key" data-insert=".">.</button>
+          <button type="button" class="key key-function" data-action="negate-next">±</button>
+          <button type="button" class="key key-function" data-insert="round(">round</button>
+          <button type="button" class="key key-answer" data-action="evaluate">=</button>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
