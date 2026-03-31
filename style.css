@@ -561,3 +561,28 @@ kbd {
     scroll-behavior: auto !important;
   }
 }
+
+@media (max-width: 480px) {
+  .keypad {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.5rem;
+  }
+
+  .key {
+    min-height: 3rem;
+    font-size: 0.9rem;
+  }
+
+  .display-panel,
+  .controls-panel {
+    padding: 0.8rem;
+  }
+
+  .result-output {
+    font-size: clamp(1.5rem, 6vw, 2.5rem);
+  }
+
+  .page-shell {
+    padding: 0.5rem;
+  }
+}
